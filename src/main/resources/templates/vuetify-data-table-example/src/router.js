@@ -11,16 +11,6 @@ export default new Router({
             alias: "/leaves",
             name: "leaves",
             component: () => import("./components/GetLeaves")
-        },
-        {
-            path: "/add",
-            name: "add",
-            component: () => import("./components/AddLeave")
-        },
-        {
-            path: "/leave-statistics",
-            name: "leave-statistics",
-            component: () => import("./components/GetLeaveStatistics")
         }
     ]
 });

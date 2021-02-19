@@ -6,10 +6,6 @@ class LeaveService {
         return http.get(`/leaves/${year}`);
     }
 
-    getByMonth(year, month) {
-        return http.get(`/leaves/${year}/${month}`);
-    }
-
     create(data) {
         return http.post(`/leaves`, data);
     }

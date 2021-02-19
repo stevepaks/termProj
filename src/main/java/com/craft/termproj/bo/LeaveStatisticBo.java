@@ -56,7 +56,7 @@ public class LeaveStatisticBo {
 
         if (leaveDto.getIsHalfDay()) {
 
-            if (BigDecimal.valueOf(remainDays).subtract(BigDecimal.valueOf(0.5D)).compareTo(BigDecimal.ZERO) <= 0) {
+            if (BigDecimal.valueOf(remainDays).subtract(BigDecimal.valueOf(0.5D)).compareTo(BigDecimal.ZERO) < 0) {
 
                 throw new InvalidArgumentException(ErrorCode.INSUFFICIENT_REMAINING_LEAVE);
             }
@@ -64,7 +64,7 @@ public class LeaveStatisticBo {
 
             final double requestDays = ChronoUnit.DAYS.between(startRequest, endRequest) + 1D;
 
-            if (BigDecimal.valueOf(remainDays).subtract(BigDecimal.valueOf(requestDays)).compareTo(BigDecimal.ZERO) <= 0) {
+            if (BigDecimal.valueOf(remainDays).subtract(BigDecimal.valueOf(requestDays)).compareTo(BigDecimal.ZERO) < 0) {
 
                 throw new InvalidArgumentException(ErrorCode.INSUFFICIENT_REMAINING_LEAVE);
             }

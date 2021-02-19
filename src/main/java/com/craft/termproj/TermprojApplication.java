@@ -21,7 +21,7 @@ public class TermprojApplication {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins("http://localhost:8080", "http://localhost:8081", "chrome-extension://fhbjgbiflinjbdggehcddcbncdddomop")
+                        .allowedOrigins("http://localhost:8080", "http://localhost:8081")
                         .allowedMethods(GET.name(), HEAD.name(), POST.name(), PUT.name(), DELETE.name());
             }
         };

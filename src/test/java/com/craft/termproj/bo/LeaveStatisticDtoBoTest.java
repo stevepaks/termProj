@@ -206,7 +206,7 @@ public class LeaveStatisticDtoBoTest {
                 .employeeId(employeeId)
                 .start(LocalDate.of(2021, 1, 1))
                 .end(LocalDate.of(2021, 1, 14))
-                .days(14D)
+                .days(14.5D)
                 .leaveStatus(LeaveStatus.APPROVED)
                 .build();
         final List<LeaveDto> leaves = Arrays.asList(leaveDto1);
@@ -218,32 +218,6 @@ public class LeaveStatisticDtoBoTest {
                 .start(from)
                 .end(to)
                 .isHalfDay(false)
-                .build();
-
-        final InvalidArgumentException exception = assertThrows(InvalidArgumentException.class, () -> leaveStatisticBo.checkIsVaildRequest(mockEmployee, leaveDto));
-        assertThat(exception.getErrorCode().getMessage(), is(INSUFFICIENT_REMAINING_LEAVE.getMessage()));
-    }
-
-    @Test
-    public void checkIsVaildRequest__insufficient_afterConsume_isHalf() {
-
-        final String employeeId = mockEmployee.getEmployeeId();
-        final LeaveDto leave1 = LeaveDto.builder()
-                .employeeId(employeeId)
-                .start(LocalDate.of(2021, 1, 1))
-                .end(LocalDate.of(2021, 1, 14))
-                .days(14.5D)
-                .leaveStatus(LeaveStatus.APPROVED)
-                .build();
-        final List<LeaveDto> leaves = Arrays.asList(leave1);
-        when(leaveBo.getLeaves(any(Employee.class), anyInt(), any(List.class))).thenReturn(leaves);
-
-        final LocalDate from = LocalDate.of(2021, 1, 15);
-        final LocalDate to = LocalDate.of(2021, 1, 15);
-        final LeaveDto leaveDto = LeaveDto.builder()
-                .start(from)
-                .end(to)
-                .isHalfDay(true)
                 .build();
 
         final InvalidArgumentException exception = assertThrows(InvalidArgumentException.class, () -> leaveStatisticBo.checkIsVaildRequest(mockEmployee, leaveDto));
@@ -459,7 +433,15 @@ public class LeaveStatisticDtoBoTest {
         final List<Employee> employees = Arrays.asList(mockEmployee);
         final List<LeaveStatisticDto> actualLeaveStatisticDtos = leaveStatisticBo.getLeaveStatistics(employees, 2021);
 
-        assertThat(actualLeaveStatisticDtos.size(), is(0));
+        assertThat(actualLeaveStatisticDtos.size(), is(1));
+        assertThat(actualLeaveStatisticDtos, is(Arrays.asList(LeaveStatisticDto.builder()
+                .employeeId("K0001")
+                .employeeName("idibros")
+                .entitlement(15D)
+                .usedDays(0D)
+                .remainDays(15D)
+                .build()))
+        );
     }
 
 }
