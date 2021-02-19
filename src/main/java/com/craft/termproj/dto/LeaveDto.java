@@ -75,6 +75,7 @@ public class LeaveDto {
     public static Function<Leave, LeaveDto> from(Employee employee) {
 
         return leave -> LeaveDto.builder()
+                .leaveId(leave.getId())
                 .employeeId(employee.getEmployeeId())
                 .employeeName(employee.getName())
                 .employeeDepartment(employee.getDepartment())
@@ -116,6 +117,20 @@ public class LeaveDto {
                     || (currentStart.compareTo(endRequest) <= 0 && endRequest.compareTo(currentEnd) <= 0)
                     || (startRequest.compareTo(currentStart) <= 0 && currentStart.compareTo(endRequest) <= 0)
                     || (startRequest.compareTo(currentEnd) <= 0 && currentEnd.compareTo(endRequest) <= 0);
+        };
+    }
+
+    public static Predicate<LeaveDto> isAnotherLeave(LeaveDto leaveDto) {
+
+        return currLeaveDto -> {
+
+            if (!Objects.nonNull(leaveDto.getLeaveId())) {
+
+                return currLeaveDto.getLeaveId().compareTo(leaveDto.getLeaveId()) != 0;
+            } else {
+
+                return true;
+            }
         };
     }
 

@@ -78,6 +78,13 @@ public class LeaveController {
 
             final Leave leave = leaveBo.getLeave(leaveId);
 
+            if (leaveStatus == LeaveStatus.APPROVED) {
+
+                final Employee employee = employeeBo.getEmployee(leave.getEmployeeId());
+
+                leaveStatisticBo.checkIsVaildRequest(employee, LeaveDto.from(employee).apply(leave));
+            }
+
             leaveBo.putLeave(leave, leaveStatus);
 
             return new ResponseEntity<>(HttpStatus.OK);

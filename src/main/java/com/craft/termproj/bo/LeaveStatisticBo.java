@@ -15,6 +15,8 @@ import java.time.temporal.ChronoUnit;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import static com.craft.termproj.constant.LeaveStatus.APPROVED;
@@ -38,7 +40,9 @@ public class LeaveStatisticBo {
             throw new InvalidArgumentException(ErrorCode.INVALID_LEAVE_PERIOD);
         }
 
-        final List<LeaveDto> leaveDtos = leaveBo.getLeaves(employee, year, Arrays.asList(PENDING, APPROVED));
+        final List<LeaveDto> leaveDtos = leaveBo.getLeaves(employee, year, Arrays.asList(PENDING, APPROVED)).stream()
+                .filter(LeaveDto.isAnotherLeave(leaveDto))
+                .collect(Collectors.toList());
 
         if (leaveDtos.stream().anyMatch(LeaveDto.isDuplicatedPeriod(startRequest, endRequest))) {
 

@@ -89,7 +89,7 @@ public class LeaveBo {
 
         if (leaveDto.getIsHalfDay()) {
 
-            leaveBuilder.days(0.5F);
+            leaveBuilder.days(0.5D);
         } else {
 
             final long days = ChronoUnit.DAYS.between(from, to)+1;
