@@ -124,7 +124,7 @@ public class LeaveDto {
 
         return currLeaveDto -> {
 
-            if (!Objects.nonNull(leaveDto.getLeaveId())) {
+            if (Objects.nonNull(leaveDto.getLeaveId())) {
 
                 return currLeaveDto.getLeaveId().compareTo(leaveDto.getLeaveId()) != 0;
             } else {
