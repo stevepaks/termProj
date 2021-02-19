@@ -13,10 +13,11 @@
         </v-col>
 
         <div class="col-md-8">
+
             <v-col cols="12" lg="12">
                 <v-card-title>Leaves</v-card-title>
                 <v-calendar ref="calendar"
-                            color="primary"
+                            color="success"
                             :events="events"
                 ></v-calendar>
             </v-col>
@@ -63,7 +64,6 @@
         </div>
     </v-row>
 </template>
-<script src='https://unpkg.com/v-calendar'></script>
 <script>
     import LeaveService from "../services/LeaveService";
     export default {
