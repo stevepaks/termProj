@@ -1,6 +1,6 @@
 # TermProject
 
-##실행 방법
+## 실행 방법
 ### server
 ```shell script
 mvn clean install
@@ -15,7 +15,7 @@ npm install axios
 
 ```
 
-##테이블 정의
+## 테이블 정의
 ```
 Employee (직원 정보)
     id IDENTITY PRIMARY KEY, (유저 ID)
