@@ -45,7 +45,7 @@
                         v-model="leave.employeeId"
                         :rules="[(v) => !!v || 'Employee Id is required']"
                         label="Employee Id"
-                        :items="['K0001']"
+                        :items="employeeIds"
                 ></v-select>
 
                 <v-date-picker
@@ -70,8 +70,10 @@
         name: "leave-list",
         data() {
             return {
+                focus: '',
+                type: 'month',
                 leave: {
-                    employeeId: "",
+                    employeeId: "K0001",
                     dates: [],
                     isHalfDay: false,
                 },
@@ -93,6 +95,7 @@
                     { text: "Used (days)", value: "usedDays", sortable: false },
                     { text: "Remain (days)", value: "remainDays", sortable: false }
                 ],
+                employeeIds: ['K0001']
             };
         },
         methods: {

@@ -9,10 +9,9 @@ java -jar target/termproj-0.0.1-SNAPSHOT.jar -Dserver.port=8081
 ### clinet
 ```shell script
 cd front-end
-npm update
 npm install vue-router
 npm install axios
-
+npm run serve
 ```
 
 ## 테이블 정의
