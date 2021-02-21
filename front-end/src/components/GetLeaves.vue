@@ -16,10 +16,35 @@
 
             <v-col cols="12" lg="12">
                 <v-card-title>Leaves</v-card-title>
-                <v-calendar ref="calendar"
-                            color="success"
+                <v-sheet
+                        tile
+                        height="54"
+                        class="d-flex"
+                >
+                    <v-btn
+                            icon
+                            class="ma-2"
+                            @click="$refs.calendar.prev()"
+                    >
+                        <v-icon>mdi-chevron-left</v-icon>
+                    </v-btn>
+                    <v-spacer></v-spacer>
+                    <v-btn
+                            icon
+                            class="ma-2"
+                            @click="$refs.calendar.next()"
+                    >
+                        <v-icon>mdi-chevron-right</v-icon>
+                    </v-btn>
+                </v-sheet>
+                <v-sheet height="400">
+                    <v-calendar
+                            ref="calendar"
+                            v-model="value"
+                            :type="type"
                             :events="events"
-                ></v-calendar>
+                    ></v-calendar>
+                </v-sheet>
             </v-col>
             <v-col cols="12" lg="12">
                 <v-card class="mx-auto">
@@ -70,8 +95,8 @@
         name: "leave-list",
         data() {
             return {
-                focus: '',
                 type: 'month',
+                value: '',
                 leave: {
                     employeeId: "K0001",
                     dates: [],
